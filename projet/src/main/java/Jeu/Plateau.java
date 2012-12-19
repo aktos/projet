@@ -33,52 +33,7 @@ public class Plateau {
 		}
 
 		// Deplacement horaire
-public List indicationDepHoraire(Jeton jeton,int deA,int deB){
-			// On cree une liste des places ou le pion peut etre deplace :
-				List places =new List();
-			
-				// On parcourt la grille constituant le plateau de jeu
-				
-					// On appelle jetonA (resp jetonB) le jeton situe a  l'emplacement position+deA (resp position+deB)
-					Jeton jetonA = this.grille.getJeton(0,jeton.getPosition()+deA);
-					Jeton jetonB = this.grille.getJeton(0,jeton.getPosition()+deB);
-					
-					// On verifie que la position correspondante est bien dans le plateau
-				if(jeton.getPosition()+deA<24 && jeton.getPosition()+deB<24)
-				{
-					// S'il n'y a pas de jeton en position+deA, le pion y est deplacable
-					if(jetonA.getCouleur()==0 )
-					{
-						places.add("positions possibles",jeton.getPosition()+deA);
-					}
-					// S'il n'y a pas de jeton en position+deB, le pion y est deplacable
-					if(jetonB.getCouleur()==0 )
-					{
-					
-						places.add("positions possibles",jeton.getPosition()+deB);
-					}
-				
-				}
-				
-				// Si un pion est deja  present on verifie si sa couleur correspond a  celle du jeton que l'on deplace
-				else
-				{
-					if (jetonB.getCouleur() == jeton.getCouleur())  
-					{
-						places.add("positions possibles",jeton.getPosition()+deB);				
-					}
-					
-					if (jetonA.getCouleur() == jeton.getCouleur()) 
-					{
-					places.add("positions possibles",jeton.getPosition()+deA);				
-					}
-				
-				}
-				
-				
-			// on renvoie la liste des places disponibles
-				return places;
-		}
+
 		
 		
 
