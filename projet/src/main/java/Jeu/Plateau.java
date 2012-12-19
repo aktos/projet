@@ -22,12 +22,51 @@ public class Plateau {
 			jeton = this.grille.getJeton(li,col);
 			return jeton;			
 		}
-	/*	public void intialiserPlateau(){
+		public void initialiserPlateau(){
 			
 			this.grille=new Grille(); 
 			
+			// Création et positionnement des jetons
 			
-		}*/
+			Joueur joueurBlanc=new Joueur(true);
+			Joueur joueurNoir = new Joueur(false);
+			
+			for(int i = 0;i<2;i++){
+				Jeton jetonB=new Jeton(joueurBlanc,0);
+				this.grille.putJeton(jetonB, i);
+			}
+			for(int i=0;i<5;i++){
+				Jeton jetonN=new Jeton(joueurNoir,5);
+				this.grille.putJeton(jetonN, i);
+			}
+			for(int i=0;i<3;i++){
+				Jeton jetonN=new Jeton(joueurNoir,7);
+				this.grille.putJeton(jetonN, i);
+			}
+			for(int i = 0;i<5;i++){
+				Jeton jetonB=new Jeton(joueurBlanc,11);
+				this.grille.putJeton(jetonB, i);
+			}
+			for(int i=0;i<5;i++){
+				Jeton jetonN=new Jeton(joueurNoir,12);
+				this.grille.putJeton(jetonN, i);
+			}
+			for(int i = 0;i<3;i++){
+				Jeton jetonB=new Jeton(joueurBlanc,16);
+				this.grille.putJeton(jetonB, i);
+			}
+			for(int i = 0;i<5;i++){
+				Jeton jetonB=new Jeton(joueurBlanc,18);
+				this.grille.putJeton(jetonB, i);
+			}
+			for(int i=0;i<2;i++){
+				Jeton jetonN=new Jeton(joueurNoir,23);
+				this.grille.putJeton(jetonN, i);
+			}
+			
+			
+			
+		}
 
 		// DÃ©placement horaire
 public List indicationDepHoraire(Jeton jeton,int deA,int deB){
