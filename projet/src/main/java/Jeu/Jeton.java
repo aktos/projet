@@ -26,9 +26,7 @@ package Jeu;
 		}
 		
 			
-	/*	public void afficherJeton() {
-		
-		}*/
+	
 		
 		public int getCouleur() {
 			
@@ -48,6 +46,5 @@ package Jeu;
 		
 		
 	}
-
 
 

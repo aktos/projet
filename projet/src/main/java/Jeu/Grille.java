@@ -16,62 +16,70 @@ public class Grille {
 		}
 	}
 	
-	public Jeton getJeton(int i,int j){
-		Jeton jeton=new Jeton();
+	
+	public int getCouleur(int i,int j){
+		int couleur=0;
+		
 		if(i<15 && j<28){
-		jeton=this.grille[i][j];
-		if(jeton!=null){
-		jeton.setPosition(j);
+		couleur=this.grille[i][j];
 		}
-		else System.out.println("jeton null");
-		}
+		
 		else System.out.println("taille trop grande !");
-		return jeton;
+		return couleur;
 		}
 	
-	public void putJeton(Jeton jeton, int i){
-		this.grille[i][jeton.getPosition()]=jeton;
-		
+
+	public void putJeton(Jeton jeton,int j){
+		 this.grille[sizeColonne(j)+1][j]=jeton.getCouleur();
+		 jeton.setPosition(j);		 
+	}
+		 
+
+
+	public int sizeColonne(int j) {
+
+		boolean trouve = false;
+		int i =0;
+		while(trouve==false){
+			if (this.grille[i][j]==0){
+				trouve=true;
+			}
+			i++;
+		}
+		return i;
 	}
 
 
 public void initialiserGrille(){
 	// Création et positionnement des jetons
 	
-				Joueur joueurBlanc=new Joueur(1);
-				Joueur joueurNoir = new Joueur(2);
+				int vide =0;
+				int Blanc=1;
+				int Noir = 2;
 				
 				for(int i = 0;i<2;i++){
-					Jeton jetonB=new Jeton(joueurBlanc,0);
-					this.grille[i][0]=jetonB;
+					this.grille[i][0]=Blanc;
 				}
 				for(int i=0;i<5;i++){
-					Jeton jetonN=new Jeton(joueurNoir,5);
-					this.grille[i][5]=jetonN;
+					this.grille[i][5]=Noir;
 				}
 				for(int i=0;i<3;i++){
-					Jeton jetonN=new Jeton(joueurNoir,7);
-					this.grille[i][7]=jetonN;
+					this.grille[i][7]=Noir;
 				}
 				for(int i = 0;i<5;i++){
-					Jeton jetonB=new Jeton(joueurBlanc,11);
-					this.grille[i][11]=jetonB;
+					this.grille[i][11]=Blanc;
 				}
 				for(int i=0;i<5;i++){
-					Jeton jetonN=new Jeton(joueurNoir,12);
-					this.grille[i][12]=jetonN;
+					this.grille[i][12]=Noir;
 				}
 				for(int i = 0;i<3;i++){
-					Jeton jetonB=new Jeton(joueurBlanc,16);
-					this.grille[i][16]=jetonB;
+					this.grille[i][16]=Blanc;
 				}
 				for(int i = 0;i<5;i++){
-					Jeton jetonB=new Jeton(joueurBlanc,18);
-					this.grille[i][18]=jetonB;
+					this.grille[i][18]=Blanc;
 				}
 				for(int i=0;i<2;i++){
-					Jeton jetonN=new Jeton(joueurNoir,23);
-					this.grille[i][23]=jetonN;
+					this.grille[i][23]=Noir;
 				}
 
 }
