@@ -30,7 +30,7 @@ public class Partie {
 						 System.out.println("Voici les places disponibles pour votre pion "+placesA.toString()+" choisissez-vous de le déplacer o ou n ?");
 						 reponse = rep.nextLine();
 						 System.out.println("Quelle position choisissez-vous pour ce pion ? (entier)");
-						// Try and Catch au cas où la valeur dep rentrée par l'utilisateur n'est pas un entier
+						// Try and Catch au cas ou la valeur dep rentree par l'utilisateur n'est pas un entier
 							try{
 								pos=rep.nextInt();
 								this.plateau.deplacer(jeton,pos);															
@@ -80,7 +80,7 @@ public class Partie {
 		Dice deA = new Dice();
 		Dice deB = new Dice();
 		
-		// Lancer de dés initial pour déterminer quel joueur débute la partie
+		// Lancer de des initial pour determiner quel joueur debute la partie
 		
 		// Premier Joueur :
 		
@@ -89,14 +89,14 @@ public class Partie {
 		 
 		 int C = deA.getNombre()+deB.getNombre();
 		 
-		// Deuxième Joueur :
+		// Deuxieme Joueur :
 			
 		 deA.lancerDice();
 		 deB.lancerDice();
 		 
 		 int D = deA.getNombre()+deB.getNombre();
 		 
-		 // le JoueurUn devient alors le vainqueur du lancé de dés.
+		 // le JoueurUn devient alors le vainqueur du lancer de des.
 		 Joueur joueurUn = new Joueur();
 		 Joueur joueurDeux = new Joueur();
 		 if (D<C){
@@ -110,25 +110,36 @@ public class Partie {
 			 
 		 }
 		 
-		 boolean Fin = false;
+		 boolean FinA = false;
+		 boolean FinB=false;
 		 
-		 while (Fin=false){
+		 while (FinA==false && FinB == false){
 			 // joueurUn
 			 faireJouer(joueurUn);
 			 
 			 // JoueurDeux
 			 faireJouer(joueurDeux);
 			 
-			// vérification que tous les jetons sont prêts à être stockés
-			 boolean ready=false;
+			// verification que tous les pions du joueur blanc sont prets a etre stockes
+			 
 			 for(int i =0;i<18;i++){
 				 Jeton parcours = this.plateau.getJeton(0, i);
 				 if (parcours.getCouleur() == false){
-					 ready = true;
+					 FinA=true;
 				 }
-				 Fin=true;
 			 }
-			 
+				
+			  
+				// verification que tous les pions du joueur noir sont prets a etre stockes
+				
+				 for(int i =23;i>5;i--){
+					 Jeton parcours = this.plateau.getJeton(0, i);
+					 if (parcours.getCouleur() == true){
+						 FinB=true;
+					 }
+					
+				 }
+		 }
 			 
 			 
 			 
