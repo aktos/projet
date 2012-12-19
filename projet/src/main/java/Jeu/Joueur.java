@@ -4,29 +4,29 @@ public class Joueur {
 	
 		// Le joueur est représenté par sa couleur
 	
-		private boolean couleur;
+		private int couleur;
 		
 		// Constructeurs du joueur
 		
 		public Joueur(){
 			
-			this.couleur=true;
+			this.couleur=1;
 		}
 	
-		public Joueur(boolean col) {
+		public Joueur(int col) {
 		
 			this.couleur = col;
 		}
 		
 		// Getters et setters
 		
-		public boolean getCouleur() {
+		public int getCouleur() {
 		
 			return couleur;
 		
 		}
 		
-		public void setCouleur(boolean col) {
+		public void setCouleur(int col) {
 		
 			this.couleur = col;
 		

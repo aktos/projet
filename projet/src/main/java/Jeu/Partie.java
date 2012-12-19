@@ -12,10 +12,11 @@ public class Partie {
 	}
 	
 	public void deplacer(Joueur joueur,int A){
-			 
+		 // Try and Catch
+		 try{
 			 String reponse =" n";
 			 int pos=0;
-			 // Boucle de recherche des déplacements possibles
+			 // Boucle de recherche des deplacements possibles
 			 while(reponse!="o"){
 				
 				 for(int j=0; j<24;j++){
@@ -29,16 +30,18 @@ public class Partie {
 					 if (placesA != null){
 						 System.out.println("Voici les places disponibles pour votre pion "+placesA.toString()+" choisissez-vous de le déplacer o ou n ?");
 						 reponse = rep.nextLine();
-						 System.out.println("Quelle position choisissez-vous pour ce pion ? (entier)");
-						// Try and Catch au cas ou la valeur dep rentree par l'utilisateur n'est pas un entier
-							try{
-								pos=rep.nextInt();
-								this.plateau.deplacer(jeton,pos);															
-							}
-							catch(InputMismatchException ime) {
+						 if(reponse=="o"){
+							 System.out.println("Quelle position choisissez-vous pour ce pion ? (entier)");
+							 // Try and Catch au cas ou la valeur dep rentree par l'utilisateur n'est pas un entier
+							 try{
+								 pos=rep.nextInt();
+								 this.plateau.deplacer(jeton,pos);															
+							 }
+							 catch(InputMismatchException ime) {
 								
-								System.out.println("Valeur saisie non numérique\n" + "ou hors des limites int."); 
-							}
+								 System.out.println("Valeur saisie non numérique\n" + "ou hors des limites int."); 
+							 }
+						 }
 					 }
 					 else {
 						 System.out.println("Passez votre tour");
@@ -46,9 +49,18 @@ public class Partie {
 					 }
 					}
 				 }
+			 }
+		 }
 					
-			 }	 
-	}
+			 
+			 catch(NullPointerException npe) {
+					
+				 System.out.println("Oups probl�me !"); 
+			 }
+		 }
+	
+
+
 	
 	public void faireJouer(Joueur joueur){
 		Dice deA = new Dice(),deB=new Dice();
@@ -74,8 +86,8 @@ public class Partie {
 	
 	public void lancerPartie(){
 		this.plateau.initialiserPlateau();
-		Joueur joueurA = new Joueur(true);
-		Joueur joueurB = new Joueur(false);
+		Joueur joueurA = new Joueur(1);
+		Joueur joueurB = new Joueur(2);
 		
 		Dice deA = new Dice();
 		Dice deB = new Dice();
@@ -121,39 +133,33 @@ public class Partie {
 			 faireJouer(joueurDeux);
 			 
 			// verification que tous les pions du joueur blanc sont prets a etre stockes
-			 
+			 try{
 			 for(int i =0;i<18;i++){
 				 Jeton parcours = this.plateau.getJeton(0, i);
-				 if (parcours.getCouleur() == false){
+				 if (parcours.getCouleur() == 2){
 					 FinA=true;
 				 }
 			 }
+			 }
+			 catch(NullPointerException npe) {
+					
+				 System.out.println("Oups probl�me !"); 
+			 }
+			 }
+			 
 				
 			  
 				// verification que tous les pions du joueur noir sont prets a etre stockes
 				
 				 for(int i =23;i>5;i--){
 					 Jeton parcours = this.plateau.getJeton(0, i);
-					 if (parcours.getCouleur() == true){
+					 if (parcours.getCouleur() == 1){
 						 FinB=true;
 					 }
 					
 				 }
 		 }
-			 
-			 
-			 
-			}
-				 
-			 
-			 
-		
-		
-		
-		
-		
-	}
-	
+}
 	
 
-}
+

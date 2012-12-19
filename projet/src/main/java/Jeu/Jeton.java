@@ -4,14 +4,14 @@ package Jeu;
 	public class Jeton {
 		
 		// ATTRIBUTS
-		private  boolean couleur; // True = blanc, False = noir.
-		private int position; // Position du dé sur le plateau
+		private  int couleur; // True = blanc, False = noir.
+		private int position; // Position du de sur le plateau
 		
 		
 		// METHODES
 		public Jeton() {
 			
-			this.couleur=true;
+			this.couleur=0;
 			this.position=1;
 		
 		}
@@ -30,7 +30,7 @@ package Jeu;
 		
 		}*/
 		
-		public boolean getCouleur() {
+		public int getCouleur() {
 			
 			return this.couleur;
 		

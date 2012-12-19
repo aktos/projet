@@ -10,7 +10,8 @@ public class Plateau {
 		
 		public Plateau(){
 			
-			grille =new Grille();
+			this.grille = new Grille();
+			this.grille.initialiserGrille();
 		}
 		public Plateau(Grille plateau) {
 			
@@ -22,50 +23,13 @@ public class Plateau {
 			jeton = this.grille.getJeton(li,col);
 			return jeton;			
 		}
-		public void initialiserPlateau(){
+		public Grille initialiserPlateau(){
 			
-			this.grille=new Grille(); 
-			
-			// Cr�ation et positionnement des jetons
-			
-			Joueur joueurBlanc=new Joueur(true);
-			Joueur joueurNoir = new Joueur(false);
-			
-			for(int i = 0;i<2;i++){
-				Jeton jetonB=new Jeton(joueurBlanc,0);
-				this.grille.putJeton(jetonB, i);
-			}
-			for(int i=0;i<5;i++){
-				Jeton jetonN=new Jeton(joueurNoir,5);
-				this.grille.putJeton(jetonN, i);
-			}
-			for(int i=0;i<3;i++){
-				Jeton jetonN=new Jeton(joueurNoir,7);
-				this.grille.putJeton(jetonN, i);
-			}
-			for(int i = 0;i<5;i++){
-				Jeton jetonB=new Jeton(joueurBlanc,11);
-				this.grille.putJeton(jetonB, i);
-			}
-			for(int i=0;i<5;i++){
-				Jeton jetonN=new Jeton(joueurNoir,12);
-				this.grille.putJeton(jetonN, i);
-			}
-			for(int i = 0;i<3;i++){
-				Jeton jetonB=new Jeton(joueurBlanc,16);
-				this.grille.putJeton(jetonB, i);
-			}
-			for(int i = 0;i<5;i++){
-				Jeton jetonB=new Jeton(joueurBlanc,18);
-				this.grille.putJeton(jetonB, i);
-			}
-			for(int i=0;i<2;i++){
-				Jeton jetonN=new Jeton(joueurNoir,23);
-				this.grille.putJeton(jetonN, i);
-			}
-			
-			
-			
+			this.grille.initialiserGrille();
+			Grille grille = new Grille();
+			grille = this.grille;
+			return grille;		
+						
 		}
 
 		// Deplacement horaire
@@ -83,12 +47,12 @@ public List indicationDepHoraire(Jeton jeton,int deA,int deB){
 				if(jeton.getPosition()+deA<24 && jeton.getPosition()+deB<24)
 				{
 					// S'il n'y a pas de jeton en position+deA, le pion y est deplacable
-					if(jetonA==null )
+					if(jetonA.getCouleur()==0 )
 					{
 						places.add("positions possibles",jeton.getPosition()+deA);
 					}
 					// S'il n'y a pas de jeton en position+deB, le pion y est deplacable
-					if(jetonB==null )
+					if(jetonB.getCouleur()==0 )
 					{
 					
 						places.add("positions possibles",jeton.getPosition()+deB);
@@ -137,12 +101,12 @@ public List indicationDepAntiHo(Jeton jeton,int deA,int deB){
 			if(0<=jeton.getPosition()-deA && 0<=jeton.getPosition()-deB)
 			{
 				// S'il n'y a pas de jeton en position+deA, le pion y est déplaçable
-				if(jetonA==null )
+				if(jetonA.getCouleur()==0 )
 				{
 					places.add("positions possibles",jeton.getPosition()-deA);
 				}
 				// S'il n'y a pas de jeton en position+deB, le pion y est déplaçable
-				if(jetonB==null )
+				if(jetonB.getCouleur()==0 )
 				{
 				
 					places.add("positions possibles",jeton.getPosition()-deB);
@@ -177,10 +141,10 @@ public List indicationDeplacement(Jeton jeton,int deA,int deB)
 			List places =new List() ;
 			
 			// On récupère la couleur du jeton pour identifier le déplacement (horaire ou anti-horaire)
-			boolean couleur=jeton.getCouleur();
+			int couleur=jeton.getCouleur();
 			
 			// si la couleur est true : déplacement horaire
-			if (couleur == true)
+			if (couleur == 1)
 			{
 			
 				places=indicationDepHoraire(jeton,deA,deB);
@@ -219,7 +183,7 @@ public List indicationMangerHoraire(Jeton jeton,int deA, int deB){
 			if (jetonB.getCouleur() == jeton.getCouleur())  
 			{
 				Jeton jetonC=this.grille.getJeton(1,jeton.getPosition()+deB);
-				if (jetonC==null){
+				if (jetonC.getCouleur()==0){
 				mange.add("positions possibles",jeton.getPosition()+deB);	
 				}
 			}
@@ -227,7 +191,7 @@ public List indicationMangerHoraire(Jeton jeton,int deA, int deB){
 			if (jetonA.getCouleur() == jeton.getCouleur()) 
 			{
 				Jeton jetonC=this.grille.getJeton(1,jeton.getPosition()+deA);
-				if (jetonC==null){
+				if (jetonC.getCouleur()==0){
 				mange.add("positions possibles",jeton.getPosition()+deA);	
 				}
 			}
@@ -250,7 +214,7 @@ public List indicationMangerAntiHo(Jeton jeton,int deA, int deB){
 			if (jetonB.getCouleur() == jeton.getCouleur())  
 			{
 				Jeton jetonC=this.grille.getJeton(1,jeton.getPosition()-deB);
-				if (jetonC==null){
+				if (jetonC.getCouleur()==0){
 				mange.add("positions possibles",jeton.getPosition()-deB);	
 				}
 			}
@@ -258,7 +222,7 @@ public List indicationMangerAntiHo(Jeton jeton,int deA, int deB){
 			if (jetonA.getCouleur() == jeton.getCouleur()) 
 			{
 				Jeton jetonC=this.grille.getJeton(1,jeton.getPosition()-deA);
-				if (jetonC==null){
+				if (jetonC.getCouleur()==0){
 				mange.add("positions possibles",jeton.getPosition()-deA);	
 				}
 			}
@@ -271,7 +235,7 @@ public List indicationMangerAntiHo(Jeton jeton,int deA, int deB){
 public List indicationManger(Jeton jeton,int deA,int deB){
 
 	List mange=new List();
-	if (jeton.getCouleur() == true){
+	if (jeton.getCouleur() == 1){
 		
 		mange = indicationMangerHoraire(jeton,deA,deB);
 		
@@ -292,13 +256,13 @@ public void manger (Jeton jeton, int i){
 	int position = jeton.getPosition()+i;
 	jeton.setPosition(position);
 	
-	if (jeton.getCouleur()== true){
-		Joueur joueur = new Joueur(false);
+	if (jeton.getCouleur()== 1){
+		Joueur joueur = new Joueur(2);
 		Jeton jetonM = new Jeton(joueur,25);
 		int j =14;
 		int n = 0;
 		while(j>0){
-			if(this.grille.getJeton(j,25)==null){
+			if(this.grille.getJeton(j,25).getCouleur()==0){
 			n=j;	
 			}
 			j--;
@@ -306,13 +270,13 @@ public void manger (Jeton jeton, int i){
 		}
 		this.grille.putJeton(jetonM, n);
 	}
-	if (jeton.getCouleur()== false){
-		Joueur joueur = new Joueur(true);
+	if (jeton.getCouleur()== 2){
+		Joueur joueur = new Joueur(1);
 		Jeton jetonM = new Jeton(joueur,24);
 		int j =14;
 		int n = 0;
 		while(j>0){
-			if(this.grille.getJeton(j,24)==null){
+			if(this.grille.getJeton(j,24).getCouleur()==0){
 			n=j;	
 			}
 			j--;
