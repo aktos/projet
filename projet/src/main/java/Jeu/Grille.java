@@ -29,12 +29,6 @@ public class Grille {
 		else System.out.println("taille trop grande !");
 		return couleur;
 		}
-	
-
-	public void putJeton(Jeton jeton,int j){
-		 this.grille[sizeColonne(j)+1][j]=jeton.getCouleur();
-		 jeton.setPosition(j);		 
-	}
 		 
 
 
@@ -95,7 +89,7 @@ public void initialiserGrille(){
 	
 	public List indicationDepHoraire(int position,int deA,int deB){
 		// On cree une liste des places ou le pion peut etre deplace :
-			List places =null;
+			List places =new List();
 		
 			// On verifie que la position correspondante est bien dans le plateau
 			if(position+deA<24 && position+deB<24)
@@ -145,12 +139,10 @@ public void initialiserGrille(){
 	//Déplacement anti-horaire (idem déplacement horaire sauf dans l'autre sens)
 	public List indicationDepAntiHo(int position,int deA,int deB){
 
-			// On crée une liste des places où le pion peut être déplacé :
+			// On cree une liste des places ou le pion peuteetre deplace :
 
-			List places =null;
-
-
-			// On parcourt l'ensemble du plateau de jeu		
+			List places =new List();
+	
 
 			{
 				// On vérifie que la position est sur le plateau
