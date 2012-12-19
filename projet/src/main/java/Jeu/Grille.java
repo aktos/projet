@@ -9,9 +9,9 @@ public class Grille {
 	public Grille(){
 		this.grille = new int[15][28];
 		
-		for (int i=1;i<15;i++){
+		for (int i=0;i<15;i++){
 			
-			for (int j=1;j<28;j++){
+			for (int j=0;j<28;j++){
 				
 				 this.grille[i][j]=0;
 			}
@@ -22,27 +22,27 @@ public class Grille {
 	public int getCouleur(int i,int j){
 		int couleur=0;
 		
-		if(i<15 && j<28){
 		couleur=this.grille[i][j];
-		}
 		
-		else System.out.println("taille trop grande !");
 		return couleur;
 		}
 		 
 
 
 	public int sizeColonne(int j) {
-
+		
+		
 		boolean trouve = false;
 		int i =0;
-		while(trouve==false){
+		while(trouve==false && i<15){
 			if (this.grille[i][j]==0){
 				trouve=true;
 			}
 			i++;
+		
 		}
-		return i;
+		return i-1;
+		
 	}
 
 
@@ -79,13 +79,24 @@ public void initialiserGrille(){
 
 }
 	public void deplacer(int position,int dice) {
-
+		if (position+dice<28){
 		int couleur = this.grille[0][position];
 		this.grille[sizeColonne(position+dice)+1][position+dice]=couleur;
 		
 		this.grille[sizeColonne(position)][position]=0;
-	
 		}
+		}
+	public List indicationDeplacement(int position,int deA,int deB){
+		
+		List places = new List();
+		if(this.grille[0][position]==1){
+			places=indicationDepHoraire(position,deA,deB);
+			}
+		if(this.grille[0][position]==2){
+			places=indicationDepAntiHo(position,deA,deB);
+			}
+		return places;
+	}
 	
 	public List indicationDepHoraire(int position,int deA,int deB){
 		// On cree une liste des places ou le pion peut etre deplace :

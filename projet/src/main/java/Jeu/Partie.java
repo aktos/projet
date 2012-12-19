@@ -5,59 +5,63 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Partie {
-	private Plateau plateau;
+	private Grille plateau;
 	
 	public Partie(){
-		this.plateau=new Plateau();
+		this.plateau=new Grille();
 	}
 	
 	public void deplacer(Joueur joueur,int A){
 		 // Try and Catch
 		 try{
-			 String reponse =" n";
+			 String reponse ="n";
+
 			 int pos=0;
+			 int j=0;
+			 
 			 // Boucle de recherche des deplacements possibles
-			 while(reponse!="o"){
+			 while(reponse=="n"){
 				
-				 for(int j=0; j<24;j++){
-					 Jeton jeton = this.plateau.getJeton(0, j);
-					 
+				int couleur = this.plateau.getCouleur(this.plateau.sizeColonne(j)-1, j);
+			//System.out.println(couleur);	
 				
-					 Scanner rep= new Scanner(System.in); // pour lire ce que dicte le joueur 
-					if(jeton.getCouleur()==joueur.getCouleur()){
-					 
-					 List placesA = this.plateau.indicationDeplacement(jeton, A, 0);
+				
+				
+				// on parcourt les jetons du joueur et on lui indique les deplacements possibles :
+				if(couleur==joueur.getCouleur()){					 
+					 List placesA = this.plateau.indicationDeplacement(j, A, 0);
 					 if (placesA != null){
+						 // pour lire ce que dicte le joueur
+						 Scanner rep= new Scanner(System.in);
 						 System.out.println("Voici les places disponibles pour votre pion "+placesA.toString()+" choisissez-vous de le dÃ©placer o ou n ?");
 						 reponse = rep.nextLine();
-						 if(reponse=="o"){
-							 System.out.println("Quelle position choisissez-vous pour ce pion ? (entier)");
+						 rep.close();
+					 }
+										 
+				}
+				 j++;
+			 }
+			 if (reponse=="o"){
+						 System.out.println("Quelle position choisissez-vous pour ce pion ? (entier)");
 							 // Try and Catch au cas ou la valeur dep rentree par l'utilisateur n'est pas un entier
 							 try{
-								 pos=rep.nextInt();
-								 this.plateau.deplacer(jeton,pos);															
+								 Scanner repo= new Scanner(System.in); 
+								 pos=repo.nextInt();
+								 this.plateau.deplacer(j,pos);	
+								 repo.close();
 							 }
 							 catch(InputMismatchException ime) {
 								
 								 System.out.println("Valeur saisie non numÃ©rique\n" + "ou hors des limites int."); 
 							 }
-						 }
-					 }
-					 else {
-						 System.out.println("Passez votre tour");
-						 reponse="o";
-					 }
-					}
-				 }
 			 }
+		 } 
+		 catch(NullPointerException npe) {
+				
+			 System.out.println("Oups problème !"); 
 		 }
-					
-			 
-			 catch(NullPointerException npe) {
-					
-				 System.out.println("Oups problème !"); 
-			 }
-		 }
+		 
+}
 	
 
 
@@ -85,7 +89,7 @@ public class Partie {
 	
 	
 	public void lancerPartie(){
-		this.plateau.initialiserPlateau();
+		this.plateau.initialiserGrille();
 		Joueur joueurA = new Joueur(1);
 		Joueur joueurB = new Joueur(2);
 		
@@ -135,8 +139,8 @@ public class Partie {
 			// verification que tous les pions du joueur blanc sont prets a etre stockes
 			 try{
 			 for(int i =0;i<18;i++){
-				 Jeton parcours = this.plateau.getJeton(0, i);
-				 if (parcours.getCouleur() == 2){
+				 int parcours = this.plateau.getCouleur(0, i);
+				 if (parcours == 2){
 					 FinA=true;
 				 }
 			 }
@@ -152,8 +156,8 @@ public class Partie {
 				// verification que tous les pions du joueur noir sont prets a etre stockes
 				
 				 for(int i =23;i>5;i--){
-					 Jeton parcours = this.plateau.getJeton(0, i);
-					 if (parcours.getCouleur() == 1){
+					 int parcours = this.plateau.getCouleur(0, i);
+					 if (parcours== 1){
 						 FinB=true;
 					 }
 					
