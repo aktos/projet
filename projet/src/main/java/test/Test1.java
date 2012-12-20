@@ -167,9 +167,10 @@ public class Test1 extends TestCase {
 		//System.out.println(grille.sizeColonne(0));
 		//grille.deplacer(11, 3);
 		
-		jeu.deplacer(joueur,3);
+		//jeu.deplacer(joueur,3);
 		//grille.manger(1, 4);
 		//grille.sortirPionsBarre(joueur, 1);
+		jeu.faireJouer(joueur);
 				
 
 		

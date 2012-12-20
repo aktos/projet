@@ -5,12 +5,17 @@ import console.Requete;
 
 public class Partie {
 	private Grille plateau;
+	private int phase;
 	
 	public Partie(){
 		this.plateau=new Grille();
+		this.phase = 0;
 	}
 	public Grille getGrille(){
 		return this.plateau;
+	}
+	public int getPhase(){
+		return this.phase;
 	}
 	
 	public boolean fin(Joueur joueur){
@@ -180,6 +185,8 @@ public class Partie {
 		
 		// Lancer de des initial pour determiner quel joueur debute la partie
 		
+		this.phase=1; // premiere phase du jeu
+		
 		// Premier Joueur :
 		
 		 deA.lancerDice();
@@ -213,7 +220,9 @@ public class Partie {
 		 
 		 boolean Fin = false;
 		 while(Fin==false){
+			 this.phase=2;
 			 faireJouer(joueurUn);
+			 this.phase=3;
 			 faireJouer(joueurDeux);
 			 
 			 for(int j=0;j<26;j++){
