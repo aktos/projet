@@ -12,64 +12,110 @@ public class Partie {
 		this.plateau=new Grille();
 	}
 	
+	public boolean fin(Joueur joueur){
+			boolean fin = false;
+		 for(int i =0;i<18;i++){
+			 int parcours = this.plateau.getCouleur(0, i);
+			 if (parcours == joueur.getCouleur()){
+				 fin=true;
+			 }
+			 
+		 	}
+		 return fin;
+		 }
+	
 	public void deplacer(Joueur joueur,int A){
 		 
 			 char reponse ='n';
 
 			 int pos=0;
 			 int j=0;
-			 Scanner rep= new Scanner(System.in);
+			 int coul = 0;
 			 
-			 // Boucle de recherche des deplacements possibles 
-			 while(reponse=='n' && j<28){
+			 Scanner rep= new Scanner(System.in);
+			 if(joueur.getCouleur()== 1){
+				coul =24;
+			 }
+			 if (joueur.getCouleur()== 2) {
+				 coul=25;
+				 }
+			 
+				 if (this.plateau.sizeColonne(coul)==0)
+				 {		 
+			 
+					 // Boucle de recherche des deplacements possibles 
+					 while(reponse=='n' && j<24){
 				
-				 int couleur = 0;
+						 int couleur = 0;
 					
-				 if (this.plateau.sizeColonne(j)==0) // si la taille de la colonne est nulle, la colonne est vide et donc couleur = 0
-				 {
-					 couleur = 0;
-				 }
-				 else
-				 {
+						 if (this.plateau.sizeColonne(j)==0) // si la taille de la colonne est nulle, la colonne est vide et donc couleur = 0
+						 {
+							 couleur = 0;
+						 }
+						 else
+						 {
 					 // Sinon on prend comme couleur la couleur du pion contenu en position taille-1
-					 int col =this.plateau.sizeColonne(j)-1;
-					 couleur = this.plateau.getCouleur(col, j);
-				 }
+							 int col =this.plateau.sizeColonne(j)-1;
+							 couleur = this.plateau.getCouleur(col, j);
+						 }
 				
-						
+						// on parcourt les jetons du joueur et on lui indique les deplacements possibles :
 				
-				 
-				// on parcourt les jetons du joueur et on lui indique les deplacements possibles :
+						 if(couleur==joueur.getCouleur()){					 
 				
-				 if(couleur==joueur.getCouleur()){					 
-				
-					 ArrayList<Integer> placesA = this.plateau.indicationDeplacement(j, A);
-					 if (placesA != null){
+							 ArrayList<Integer> placesA = this.plateau.indicationDeplacement(j, A);
+							 if (placesA != null){
 						 // pour lire ce que dicte le joueur
 						 
 						 
-						 System.out.println("Voici les places disponibles pour le pion "+j+" : "+placesA.toString()+" choisissez-vous de le deplacer o ou n ?");
-						 String r = rep.nextLine();
-						 reponse = r.charAt(0);
+								 System.out.println("Voici les places disponibles pour le pion "+j+" : "+placesA.toString()+" choisissez-vous de le deplacer o ou n ?");
+								 String r = rep.nextLine();
+								 reponse = r.charAt(0);
 						 
-					 }
+							 }
 										 
-				}
-				 j++;
-			 }
-			 		// Au sein de la liste des positions possibles, le joueur choisit la position pour son pion :
-					 System.out.println("Quelle position choisissez-vous pour ce pion ? (entier)");
-					 long position=rep.nextLong();
-					 System.out.println(position);
+						 }
+						 j++;
+					 }
+					 // Au sein de la liste des positions possibles, le joueur choisit la position pour son pion :
+					 	System.out.println("Quelle position choisissez-vous pour ce pion ? (entier)");
+					 	long position=rep.nextLong();
+					 	
 					 
-					 pos=(int)position; 
-					 this.plateau.deplacer(j-1,pos-j+1);	
+					 	pos=(int)position; 
+					 	this.plateau.deplacer(j-1,pos-j+1);	
 					 
-					 System.out.println("deplacement reussi !");
+					 	System.out.println("deplacement reussi !");
 
-					 rep.close();
+					 	
 		
-		 
+				 }
+				 if(this.plateau.sizeColonne(coul)!=0){
+					System.out.println("Vous avez des pions piégés dans la barre !");
+					
+					for(int j1 = 0;j1<this.plateau.sizeColonne(coul);j1++){
+						ArrayList<Integer> liste= new ArrayList<Integer>();
+						liste = this.plateau.indicSortirPionsBarre(joueur, A);
+						if (liste!=null){
+							System.out.println("Vous pouvez sortir le pion"+j1+"aux positions suivante :"+ liste.toString());
+							System.out.println("Souhaitez-vous le choisir ? o ou n");
+							String ans=rep.nextLine();
+							char answer = ans.charAt(0);
+							if(answer=='o'){
+								System.out.println("Quelle position choisissez-vous ?");
+								long c = rep.nextLong();
+								int choix=(int)c;
+								this.plateau.sortirPionsBarre(joueur, choix);
+							}
+							else {
+								System.out.println("Passez votre tour !");
+							}
+					 }
+				 }
+					 
+					 
+				 }
+				 rep.close();
 }
 	public void initialiser(){
 		this.plateau.initialiserGrille();
@@ -85,17 +131,32 @@ public class Partie {
 		 int A = deA.getNombre();
 		 int B = deB.getNombre();
 		 
-		// cas de non double
-		 if (A!=B){
-			 deplacer(joueur,A);
-			 deplacer(joueur,B);
+		 if(fin(joueur)==false)
+		 {		 
+			 // cas de non double
+			 if (A!=B){
+				 deplacer(joueur,A);
+				 deplacer(joueur,B);
+			 }
+			 else
+			 { 
+			 // Cas du double
+				 for(int i=1;i<5;i++)
+				 {
+					 deplacer(joueur,A);
+				 }
+			 }
 		 }
-		 else{ 
-		 // Cas du double
-		 for(int i=1;i<5;i++){
-			 deplacer(joueur,A);
+		 else {
+			 
+			 this.plateau.stocker(joueur,A);
+			 this.plateau.stocker(joueur,B);
+			 if(A==B){
+				 this.plateau.stocker(joueur,A);
+				 this.plateau.stocker(joueur,B); 
+			 }
+			 
 		 }
-	}
 	}
 	
 	
@@ -137,44 +198,16 @@ public class Partie {
 			 
 		 }
 		 
-		 boolean FinA = false;
-		 boolean FinB=false;
-		 
-		 while (FinA==false && FinB == false){
-			 // joueurUn
+		 boolean FinUn = fin(joueurUn);
+		 boolean FinDeux = fin(joueurDeux);
+		 boolean Fin = false;
+		 while(Fin==false){
 			 faireJouer(joueurUn);
-			 
-			 // JoueurDeux
 			 faireJouer(joueurDeux);
-			 
-			// verification que tous les pions du joueur blanc sont prets a etre stockes
-			 try{
-			 for(int i =0;i<18;i++){
-				 int parcours = this.plateau.getCouleur(0, i);
-				 if (parcours == 2){
-					 FinA=true;
-				 }
-			 }
-			 }
-			 catch(NullPointerException npe) {
-					
-				 System.out.println("Oups problème !"); 
-			 }
-			 }
-			 
-				
-			  
-				// verification que tous les pions du joueur noir sont prets a etre stockes
-				
-				 for(int i =23;i>5;i--){
-					 int parcours = this.plateau.getCouleur(0, i);
-					 if (parcours== 1){
-						 FinB=true;
-					 }
-					
-				 }
 		 }
+		 
+		
+	}
 }
-	
 
 

@@ -244,7 +244,7 @@ public void initialiserGrille(){
 
 				// Methode manger un autre pion
 			public void manger(int position,int dice) {
-				if ((position+dice) <28){
+				if ((position+dice) <24){
 				int couleur = this.grille[0][position+dice];
 				deplacer(position,dice);
 				
@@ -260,6 +260,73 @@ public void initialiserGrille(){
 					System.out.println("position demandée n'est pas sur le plateau");
 				}
 				}	
+			
+			public ArrayList<Integer> indicSortirPionsBarre(Joueur joueur, int de){
+				
+				ArrayList<Integer> places = new ArrayList<Integer>();
+				
+				if(joueur.getCouleur()==1){
+					
+					int j = 0;
+					while(j<6){
+						if (j==de-1){
+						if (sizeColonne(j)==0){
+							places.add(j);
+						}
+						if (this.grille[0][j]==1){
+							places.add(j);
+						}
+						if (this.grille[0][j]==2 && sizeColonne(j)==1){
+							places.add(j);
+						}
+						j++;
+						
+					}
+					}
+				}
+				if(joueur.getCouleur()==2){
+					
+					int j = 23;
+					while(j>17){
+						if (j==24-de){
+						if (sizeColonne(j)==0){
+							places.add(j);
+						}
+						if (this.grille[0][j]==2){
+							places.add(j);
+						}
+						if (this.grille[0][j]==1 && sizeColonne(j)==1){
+							places.add(j);
+						}
+						j--;
+						
+					}
+					}
+				}
+				return places;
+				
+			}
+			public void sortirPionsBarre(Joueur joueur,int pos){
+				int couleur = joueur.getCouleur();
+				if(couleur==1){
+					deplacer(24,pos-24);
+				}
+				if(couleur==2){
+					deplacer(25,25-pos);
+				}
+			}
+			
+			public void stocker(Joueur joueur,int position){
+				int couleur = joueur.getCouleur();
+				if(couleur==1){
+					deplacer(position,26);
+				}
+				if(couleur==2){
+					deplacer(position,27);
+				}
+			}
+			
+			
 	
     public static String listToString(ArrayList<Integer>list,String header, String separator, String footer) {
             String delim = "";

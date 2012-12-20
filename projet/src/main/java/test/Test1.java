@@ -168,6 +168,8 @@ public class Test1 extends TestCase {
 		//grille.deplacer(11, 3);
 		
 		jeu.deplacer(joueur,3);
+		//grille.manger(1, 4);
+		//grille.sortirPionsBarre(joueur, 1);
 				
 
 		
