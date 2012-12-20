@@ -84,9 +84,9 @@ public class Bouton extends JPanel implements Pilote{
 		// Pour afficher le JPanel Bouton seulement après l'accueil
 		this.setVisible(true);
 		
-		//On cache tout et on rem
+		//On cache tout et on remet
 		for(int i = 0; i <tabBt.length; i++) {
-			afficherBt(i , false);
+			afficherBt(i , true);
 		}
 		
 		// TODO à complèter : affichage des boutons en fonction des phases de jeu

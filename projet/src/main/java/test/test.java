@@ -5,15 +5,15 @@ package test;
 
 import java.util.Scanner;
 
-import Jeu.Dice;
+//import Jeu.Dice;
 import Jeu.Grille;
 
-import Jeu.Joueur;
-import Jeu.Partie;
+//import Jeu.Joueur;
+//import Jeu.Partie;
 
 
 
-import junit.framework.Test;
+//import junit.framework.Test;
 import junit.framework.TestCase;
 
 
@@ -160,8 +160,8 @@ public class test extends TestCase {
 	}*/
 	// Test de la classe Partie
 	public void testPartie(){
-		Joueur joueur = new Joueur(1);
-		Partie jeu = new Partie();
+		//Joueur joueur = new Joueur(1);
+		//Partie jeu = new Partie();
 		Grille grille = new Grille();
 		grille.initialiserGrille();
 		System.out.println(grille.sizeColonne(23));

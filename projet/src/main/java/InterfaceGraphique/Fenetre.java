@@ -30,7 +30,7 @@ public class Fenetre extends JFrame {
 	public Fenetre(){
 		this.setName("BackGammon"); //ID de l'objet
 		this.setTitle("BackGammon"); // Titre de la fenêtre
-		this.setSize(600,400); // Taille de la fenêtre
+		this.setSize(600,590); // Taille de la fenêtre
 		this.setResizable(false); // Taille fixe
 		this.setLocationRelativeTo(null); // Centrer la fenêtre
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Action du bouton fermer

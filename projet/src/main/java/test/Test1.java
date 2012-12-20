@@ -1,11 +1,11 @@
 package test;
 
 import junit.framework.TestCase;
-import java.awt.List;
-import java.util.ArrayList;
-import java.util.Scanner;
+//import java.awt.List;
+//import java.util.ArrayList;
+//import java.util.Scanner;
 
-import Jeu.Dice;
+//import Jeu.Dice;
 import Jeu.Grille;
 
 import Jeu.Joueur;
@@ -13,8 +13,8 @@ import Jeu.Partie;
 
 
 
-import junit.framework.Test;
-import junit.framework.TestCase;
+//import junit.framework.Test;
+//import junit.framework.TestCase;
 
 public class Test1 extends TestCase {
 

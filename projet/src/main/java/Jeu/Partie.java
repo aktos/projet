@@ -1,9 +1,7 @@
 package Jeu;
 
-import java.awt.List;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import console.Requete;
 
 public class Partie {
 	private Grille plateau;
@@ -30,23 +28,27 @@ public class Partie {
 
 			 int pos=0;
 			 int j=0;
-			 int coul = 0;
+			 int coul = 0; // identification de la barre correspondant au joueur
+			 Requete requete = new Requete();
 			 
-			 Scanner rep= new Scanner(System.in);
+			
 			 if(joueur.getCouleur()== 1){
 				coul =24;
 			 }
-			 if (joueur.getCouleur()== 2) {
-				 coul=25;
-				 }
 			 
+			 if (joueur.getCouleur()== 2)
+			 {
+				 coul=25;
+			 }
+			 
+			 // Si la taille de la barre est nulle, la barre est vide donc le joueur peut deplacer ses pions normalement
 				 if (this.plateau.sizeColonne(coul)==0)
 				 {		 
 			 
 					 // Boucle de recherche des deplacements possibles 
 					 while(reponse=='n' && j<24){
 				
-						 int couleur = 0;
+						 int couleur = 0;// represente la couleur de la colonne
 					
 						 if (this.plateau.sizeColonne(j)==0) // si la taille de la colonne est nulle, la colonne est vide et donc couleur = 0
 						 {
@@ -54,7 +56,7 @@ public class Partie {
 						 }
 						 else
 						 {
-					 // Sinon on prend comme couleur la couleur du pion contenu en position taille-1
+					 // Sinon on prend comme couleur la couleur de la colonne j (couleur du pion contenu en position taille-1)
 							 int col =this.plateau.sizeColonne(j)-1;
 							 couleur = this.plateau.getCouleur(col, j);
 						 }
@@ -63,59 +65,50 @@ public class Partie {
 				
 						 if(couleur==joueur.getCouleur()){					 
 				
-							 ArrayList<Integer> placesA = this.plateau.indicationDeplacement(j, A);
+							 ArrayList<Integer> placesA = this.plateau.indicationDeplacement(j, j+A);
+							 
 							 if (placesA != null){
-						 // pour lire ce que dicte le joueur
+						 // pour lire ce que dicte le joueur						 
 						 
-						 
-								 System.out.println("Voici les places disponibles pour le pion "+j+" : "+placesA.toString()+" choisissez-vous de le deplacer o ou n ?");
-								 String r = rep.nextLine();
-								 reponse = r.charAt(0);
-						 
+								 reponse=requete.demanderChar("Voici les places disponibles pour le pion "+j+" : "+placesA.toString()+" choisissez-vous de le deplacer o ou n ?");
+								 }
+							 
+							 j++;
 							 }
-										 
-						 }
-						 j++;
+			
+								 if (reponse=='o'){
+								 // Au sein de la liste des positions possibles, le joueur choisit la position pour son pion :
+									 pos =requete.demanderEntier("Quelle position choisissez-vous pour ce pion ? (entier)") ;
+									 this.plateau.deplacer(j-1,pos);	
+									 System.out.println("deplacement reussi !");
+								 }
 					 }
-					 // Au sein de la liste des positions possibles, le joueur choisit la position pour son pion :
-					 	System.out.println("Quelle position choisissez-vous pour ce pion ? (entier)");
-					 	long position=rep.nextLong();
-					 	
-					 
-					 	pos=(int)position; 
-					 	this.plateau.deplacer(j-1,pos-j+1);	
-					 
-					 	System.out.println("deplacement reussi !");
-
-					 	
-		
 				 }
+							 			 
+				 
 				 if(this.plateau.sizeColonne(coul)!=0){
 					System.out.println("Vous avez des pions piégés dans la barre !");
 					
-					for(int j1 = 0;j1<this.plateau.sizeColonne(coul);j1++){
+				/*	for(int j1 = 0;j1<this.plateau.sizeColonne(coul);j1++){
 						ArrayList<Integer> liste= new ArrayList<Integer>();
 						liste = this.plateau.indicSortirPionsBarre(joueur, A);
 						if (liste!=null){
 							System.out.println("Vous pouvez sortir le pion"+j1+"aux positions suivante :"+ liste.toString());
-							System.out.println("Souhaitez-vous le choisir ? o ou n");
-							String ans=rep.nextLine();
-							char answer = ans.charAt(0);
+
+							char answer = requete.demanderChar("Souhaitez-vous le choisir ? o ou n");
 							if(answer=='o'){
-								System.out.println("Quelle position choisissez-vous ?");
-								long c = rep.nextLong();
-								int choix=(int)c;
+								int choix= requete.demanderEntier("Quelle position choisissez-vous ?");
 								this.plateau.sortirPionsBarre(joueur, choix);
 							}
 							else {
 								System.out.println("Passez votre tour !");
 							}
 					 }
-				 }
+				 }*/
 					 
 					 
 				 }
-				 rep.close();
+				
 }
 	public void initialiser(){
 		this.plateau.initialiserGrille();
@@ -124,12 +117,15 @@ public class Partie {
 
 	
 	public void faireJouer(Joueur joueur){
-		Dice deA = new Dice(),deB=new Dice();
+		Dice deA = new Dice();
+		Dice deB=new Dice();
 		deA.lancerDice();
 		deB.lancerDice();
 		 
 		 int A = deA.getNombre();
+		 System.out.println("le premier de a pour valeur : "+A);
 		 int B = deB.getNombre();
+		 System.out.println("le premier de a pour valeur : "+B);
 		 
 		 if(fin(joueur)==false)
 		 {		 
@@ -198,8 +194,7 @@ public class Partie {
 			 
 		 }
 		 
-		 boolean FinUn = fin(joueurUn);
-		 boolean FinDeux = fin(joueurDeux);
+		
 		 boolean Fin = false;
 		 while(Fin==false){
 			 faireJouer(joueurUn);

@@ -1,6 +1,5 @@
 package Jeu;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 public class Grille {
@@ -79,10 +78,10 @@ public void initialiserGrille(){
 				}
 
 }
-	public void deplacer(int position,int dice) {
-		if ((position+dice) <28){
+	public void deplacer(int position,int arrivee) {
+		if ((arrivee) <28){
 		int couleur = this.grille[0][position];
-		this.grille[sizeColonne(position+dice)+1][position+dice]=couleur;
+		this.grille[sizeColonne(arrivee)+1][arrivee]=couleur;
 		
 		this.grille[sizeColonne(position)][position]=0;
 		}
@@ -92,29 +91,29 @@ public void initialiserGrille(){
 		}
 		}
 	
-	public ArrayList<Integer> indicationDeplacement(int position,int deA){
+	public ArrayList<Integer> indicationDeplacement(int position,int arrivee){
 		
 		ArrayList<Integer> places = new ArrayList<Integer>();
 		if(this.grille[0][position]==1){
-			places=indicationDepHoraire(position,deA);
+			places=indicationDepHoraire(position,arrivee);
 			}
 		if(this.grille[0][position]==2){
-			places=indicationDepAntiHo(position,deA);
+			places=indicationDepAntiHo(position,arrivee);
 			}
 		return places;
 	}
 	
-	public ArrayList<Integer> indicationDepHoraire(int position,int deA){
+	public ArrayList<Integer> indicationDepHoraire(int position,int arrivee){
 		// On cree une liste des places ou le pion peut etre deplace :
 		ArrayList<Integer> places =new ArrayList<Integer>();
 		
 			// On verifie que la position correspondante est bien dans le plateau
-			if(position+deA<24)
+			if(arrivee<24)
 			{
 
 			
 				// On appelle couleurA (resp couleurB) la couleur du jeton situe a� l'emplacement position+deA (resp position+deB)
-					int couleurA = this.grille[0][position+deA];
+					int couleurA = this.grille[0][arrivee];
 					
 					int couleur = this.grille[0][position];
 				
@@ -122,7 +121,7 @@ public void initialiserGrille(){
 				// S'il n'y a pas de jeton en position+deA, le pion y est deplacable
 					if(couleurA==0 )
 					{
-						places.add(position+deA);
+						places.add(arrivee);
 					}
 			
 					
@@ -132,7 +131,7 @@ public void initialiserGrille(){
 				
 						if (couleurA == couleur) 
 						{
-							places.add(position+deA);				
+							places.add(arrivee);				
 						}
 			
 					}
@@ -144,7 +143,7 @@ public void initialiserGrille(){
 	}
 	
 	//Déplacement anti-horaire (idem déplacement horaire sauf dans l'autre sens)
-	public ArrayList<Integer> indicationDepAntiHo(int position,int deA){
+	public ArrayList<Integer> indicationDepAntiHo(int position,int arrivee){
 
 			// On cree une liste des places ou le pion peuteetre deplace :
 
@@ -153,11 +152,11 @@ public void initialiserGrille(){
 
 			{
 				// On vérifie que la position est sur le plateau
-				if(0<=position-deA )
+				if(0<=arrivee )
 				{
 					
 				// On appelle jetonA (resp jetonB) le jeton situé à l'emplacement position-deA (resp position-deB)
-					int couleurA = this.grille[0][position-deA];
+					int couleurA = this.grille[0][arrivee];
 					
 					int couleur = this.grille[0][position];
 					
@@ -165,7 +164,7 @@ public void initialiserGrille(){
 				// S'il n'y a pas de jeton en position+deA, le pion y est déplaçable
 					if(couleurA==0 )
 					{
-						places.add(position-deA);
+						places.add(arrivee);
 					}
 							
 				// Si un pion est déjà présent on vérifie si sa couleur correspond à celle du jeton que l'on déplace
@@ -174,7 +173,7 @@ public void initialiserGrille(){
 						
 						if (couleurA == couleur) 
 						{
-							places.add(position-deA);				
+							places.add(arrivee);				
 						}
 				
 					}
@@ -183,19 +182,19 @@ public void initialiserGrille(){
 			return places;
 	}
 			
-			public ArrayList<Integer> indicationMangerHoraire(int position,int deA){
+			public ArrayList<Integer> indicationMangerHoraire(int position,int arrivee){
 				ArrayList<Integer> mange = new ArrayList<Integer>();
 				
-				int couleurA = this.grille[0][position+deA];
+				int couleurA = this.grille[0][arrivee];
 				int couleur = this.grille[0][position];
 				// On vérifie que la position correspondante est bien dans le plateau
-				if(position+deA<24 && sizeColonne(position+deA)==1)
+				if(arrivee<24 && sizeColonne(arrivee)==1)
 					{
 					// Si un pion est déjà présent on vérifie si sa couleur correspond à celle du jeton que l'on déplace
 					
 						if (couleurA != couleur && couleurA!=0)  
 						{
-							mange.add(position+deA);						
+							mange.add(arrivee);						
 						}
 							
 					}
@@ -204,36 +203,36 @@ public void initialiserGrille(){
 			}
 			
 			
-			public ArrayList<Integer> indicationMangerAntiHo(int position,int deA){
+			public ArrayList<Integer> indicationMangerAntiHo(int position,int arrivee){
 				ArrayList<Integer> mange = new ArrayList<Integer>();
 				
-				int couleurA = this.grille[0][position-deA];
+				int couleurA = this.grille[0][arrivee];
 				int couleur = this.grille[0][position];
 				// On vérifie que la position correspondante est bien dans le plateau
-				if(position-deA<24 && sizeColonne(position-deA)==1)
+				if(arrivee<24 && sizeColonne(arrivee)==1)
 					{
 					// Si un pion est déjà présent on vérifie si sa couleur correspond à celle du jeton que l'on déplace
 					
 						if (couleurA != couleur && couleurA!=0)  
 						{
-							mange.add(position-deA);						
+							mange.add(arrivee);						
 						}
 							
 					}
 				
 				return mange;
 			}
-			public ArrayList<Integer> indicationManger(int position,int deA){
+			public ArrayList<Integer> indicationManger(int position,int arrivee){
 
 				ArrayList<Integer> mange=new ArrayList<Integer>();
 				if (grille[0][position]==1){
 					
-					mange = indicationMangerHoraire(position,deA);
+					mange = indicationMangerHoraire(position,arrivee);
 					
 				}
 				
 				else {
-					mange = indicationMangerAntiHo(position,deA);
+					mange = indicationMangerAntiHo(position,arrivee);
 				}
 				
 
@@ -243,16 +242,16 @@ public void initialiserGrille(){
 
 
 				// Methode manger un autre pion
-			public void manger(int position,int dice) {
-				if ((position+dice) <24){
-				int couleur = this.grille[0][position+dice];
-				deplacer(position,dice);
+			public void manger(int position,int arrivee) {
+				if ((arrivee) <24){
+				int couleur = this.grille[0][arrivee];
+				deplacer(position,arrivee);
 				
 				if (couleur == 1){
-					deplacer(position+dice,24-(position+dice));
+					deplacer(arrivee,24-(arrivee));
 				}
 				if (couleur == 2){
-					deplacer(position+dice,25-(position+dice));
+					deplacer(arrivee,25-(arrivee));
 				}
 				}
 				

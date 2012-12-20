@@ -1,8 +1,4 @@
 
-import java.awt.List;
-import java.util.Scanner;
-
-import Jeu.Dice;
 import Jeu.Grille;
 
 import Jeu.Joueur;
@@ -10,7 +6,6 @@ import Jeu.Partie;
 
 
 
-import junit.framework.Test;
 import junit.framework.TestCase;
 
 
