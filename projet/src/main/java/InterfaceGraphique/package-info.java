@@ -1,8 +1,0 @@
-/**
- * 
- */
-/**
- * @author Audrey
- *
- */
-package InterfaceGraphique;
