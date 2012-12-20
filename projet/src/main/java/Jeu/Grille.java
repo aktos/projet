@@ -1,6 +1,7 @@
 package Jeu;
 
 import java.awt.List;
+import java.util.ArrayList;
 
 public class Grille {
 
@@ -85,58 +86,52 @@ public void initialiserGrille(){
 		
 		this.grille[sizeColonne(position)][position]=0;
 		}
+		else{ 
+			System.out.println("position demand�e n'est pas sur le plateau");
 		}
-	public List indicationDeplacement(int position,int deA,int deB){
+		}
+	
+	public ArrayList<Integer> indicationDeplacement(int position,int deA){
 		
-		List places = new List();
+		ArrayList<Integer> places = new ArrayList<Integer>();
 		if(this.grille[0][position]==1){
-			places=indicationDepHoraire(position,deA,deB);
+			places=indicationDepHoraire(position,deA);
 			}
 		if(this.grille[0][position]==2){
-			places=indicationDepAntiHo(position,deA,deB);
+			places=indicationDepAntiHo(position,deA);
 			}
 		return places;
 	}
 	
-	public List indicationDepHoraire(int position,int deA,int deB){
+	public ArrayList<Integer> indicationDepHoraire(int position,int deA){
 		// On cree une liste des places ou le pion peut etre deplace :
-			List places =new List();
+		ArrayList<Integer> places =new ArrayList<Integer>();
 		
 			// On verifie que la position correspondante est bien dans le plateau
-			if(position+deA<24 && position+deB<24)
+			if(position+deA<24)
 			{
 
 			
 				// On appelle couleurA (resp couleurB) la couleur du jeton situe a� l'emplacement position+deA (resp position+deB)
 					int couleurA = this.grille[0][position+deA];
-					int couleurB = this.grille[0][position+deB];
+					
 					int couleur = this.grille[0][position];
 				
 			
 				// S'il n'y a pas de jeton en position+deA, le pion y est deplacable
 					if(couleurA==0 )
 					{
-						places.add("positions possibles",position+deA);
-					}
-				// S'il n'y a pas de jeton en position+deB, le pion y est deplacable
-					if(couleurB==0 )
-					{
-				
-						places.add("positions possibles",position+deB);
+						places.add(position+deA);
 					}
 			
 					
 			// Si un pion est deja� present on verifie si sa couleur correspond a� celle du jeton que l'on deplace
 					else
 					{
-						if (couleurB == couleur)  
-						{
-							places.add("positions possibles",position+deB);				
-						}
 				
 						if (couleurA == couleur) 
 						{
-							places.add("positions possibles",position+deA);				
+							places.add(position+deA);				
 						}
 			
 					}
@@ -148,47 +143,37 @@ public void initialiserGrille(){
 	}
 	
 	//Déplacement anti-horaire (idem déplacement horaire sauf dans l'autre sens)
-	public List indicationDepAntiHo(int position,int deA,int deB){
+	public ArrayList<Integer> indicationDepAntiHo(int position,int deA){
 
 			// On cree une liste des places ou le pion peuteetre deplace :
 
-			List places =new List();
+			ArrayList<Integer> places =new ArrayList<Integer>();
 	
 
 			{
 				// On vérifie que la position est sur le plateau
-				if(0<=position-deA && 0<=position-deB)
+				if(0<=position-deA )
 				{
 					
 				// On appelle jetonA (resp jetonB) le jeton situé à l'emplacement position-deA (resp position-deB)
 					int couleurA = this.grille[0][position-deA];
-					int couleurB = this.grille[0][position-deB];
+					
 					int couleur = this.grille[0][position];
 					
 				
 				// S'il n'y a pas de jeton en position+deA, le pion y est déplaçable
 					if(couleurA==0 )
 					{
-						places.add("positions possibles",position-deA);
-					}
-					// S'il n'y a pas de jeton en position+deB, le pion y est déplaçable
-					if(couleurB==0 )
-					{
-					
-						places.add("positions possibles",position-deB);
+						places.add(position-deA);
 					}
 							
 				// Si un pion est déjà présent on vérifie si sa couleur correspond à celle du jeton que l'on déplace
 					else
 					{
-						if (couleurB == couleur)  
-						{
-							places.add("positions possibles",position-deB);				
-						}
-					
+						
 						if (couleurA == couleur) 
 						{
-							places.add("positions possibles",position-deA);				
+							places.add(position-deA);				
 						}
 				
 					}
@@ -196,5 +181,17 @@ public void initialiserGrille(){
 			}
 			return places;
 			}
+	
+    public static String listToString(ArrayList<Integer>list,String header, String separator, String footer) {
+            String delim = "";
+            StringBuilder sb = new StringBuilder(header);
+
+            for (int i = 0; i < list.size(); i++) {
+                sb.append(delim).append("" + list.get(i));
+                delim = separator;
+            }
+
+            return sb.append(footer).toString();
+        }
 	}
 

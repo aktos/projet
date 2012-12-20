@@ -1,17 +1,18 @@
-package backgammon.projet1;
+package test;
 
 
 
-import java.awt.List;
+
+import java.util.Scanner;
 
 import Jeu.Dice;
 import Jeu.Grille;
-import Jeu.Jeton;
+
 import Jeu.Joueur;
 import Jeu.Partie;
-import Jeu.Plateau;
 
-import ressources.Array2D;
+
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 
@@ -22,7 +23,7 @@ public class test extends TestCase {
 	
 	//--------- Test de la classe Dice
 	
-	public void testGetterD(){
+/*	public void testGetterD(){
 		
 		Dice deA = new Dice();
 		
@@ -56,33 +57,33 @@ public class test extends TestCase {
 	public void testGetterJo(){
 		
 		Joueur joueurA = new Joueur();
-		Joueur joueurB = new Joueur(false);
+		Joueur joueurB = new Joueur(1);
 		
-		boolean couleurA =joueurA.getCouleur();
-		boolean couleurB =joueurB.getCouleur();
+		int couleurA =joueurA.getCouleur();
+		int couleurB =joueurB.getCouleur();
 		
 		System.out.println(couleurA + " " + couleurB);
 	}
 	
 	public void testSetterJo(){
 		Joueur joueurA = new Joueur();
-		joueurA.setCouleur(false);
-		boolean couleurA =joueurA.getCouleur();
+		joueurA.setCouleur(2);
+		int couleurA =joueurA.getCouleur();
 		System.out.println(couleurA);
 		
 		
 	}
-	
+	*/
 	// ------------ Test de la classe Jeton------------
 	
-	
+/*	
 	public void testGettersJ(){
 		
 		Joueur joueur = new Joueur();
 		Jeton jetonA = new Jeton();
 		Jeton jetonB =new Jeton(joueur,4);
 		
-		boolean couleurA=jetonA.getCouleur();
+		int couleurA=jetonA.getCouleur();
 		int positionB=jetonB.getPosition();
 		
 		System.out.println(couleurA + " " + positionB);
@@ -100,23 +101,32 @@ public class test extends TestCase {
 		
 		System.out.println( positionB);
 		
-	}
+	}*/
 	
 
 	
 	//-----------Test Grille
 	
-	public void testGrille(){
+	/*public void testGrille(){
 		
 		Grille grille = new Grille();
-		Jeton jeton = grille.getJeton(1,2);
-		int a = jeton.getPosition();
+		int a = grille.getCouleur(1,2);
 		System.out.println(a);
-	}
+		grille.initialiserGrille();
+		for(int i=0;i<15;i++){
+			for(int j=0;j<28;j++){
+				System.out.println(grille.getCouleur(i, j));
+			}
+			grille.deplacer(1, 6);
+		}
+		grille.indicationDepAntiHo(4, 5, 1);
+		grille.indicationDepHoraire(3, 2, 1);
+		System.out.println(grille.sizeColonne(7));
+	}*/
 	
 	// ------------- Test de la classe Plateau 
 	
-	public void testConstructor(){
+	/*public void testConstructor(){
 		Grille grille= new Grille();
 		
 		Plateau plateauA = new Plateau();
@@ -143,16 +153,23 @@ public class test extends TestCase {
 		
 	}
 	public void testManger(){
-		Jeton jeton = new Jeton();
-		Plateau plateauA = new Plateau();
+		
 		plateauA.manger(jeton,2);
 		System.out.println("position : "+jeton.getPosition());
 		
-	}
+	}*/
 	// Test de la classe Partie
 	public void testPartie(){
+		Joueur joueur = new Joueur(1);
 		Partie jeu = new Partie();
-		jeu.lancerPartie();
+		Grille grille = new Grille();
+		grille.initialiserGrille();
+		System.out.println(grille.sizeColonne(23));
+		grille.deplacer(1, 6);
+		
+		jeu.deplacer(joueur,3);
+	
+			
 	}
-	}
-
+	
+}

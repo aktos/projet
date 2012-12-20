@@ -1,6 +1,7 @@
 package Jeu;
 
 import java.awt.List;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -20,16 +21,23 @@ public class Partie {
 			 int j=0;
 			 
 			 // Boucle de recherche des deplacements possibles
-			 while(reponse=="n"){
+			 while(reponse=="n" && j<28){
 				
-				int couleur = this.plateau.getCouleur(this.plateau.sizeColonne(j)-1, j);
-			//System.out.println(couleur);	
-				
+				 int couleur = 0;
+					
+				 if (this.plateau.sizeColonne(j)==0)
+				 {
+					 couleur = 0;
+				 }
+				 else{ couleur = this.plateau.getCouleur(this.plateau.sizeColonne(j)-1, j);}
+				 System.out.println(couleur);
+						
 				
 				
 				// on parcourt les jetons du joueur et on lui indique les deplacements possibles :
-				if(couleur==joueur.getCouleur()){					 
-					 List placesA = this.plateau.indicationDeplacement(j, A, 0);
+				 if(couleur==joueur.getCouleur()){					 
+				
+					 ArrayList<Integer> placesA = this.plateau.indicationDeplacement(j, A);
 					 if (placesA != null){
 						 // pour lire ce que dicte le joueur
 						 Scanner rep= new Scanner(System.in);
