@@ -78,7 +78,8 @@ public void initialiserGrille(){
 				}
 
 }
-	public void deplacer(int position,int arrivee) {
+	public void deplacer(int position,int deA) {
+		int arrivee = position + deA;
 		if ((arrivee) <28){
 		int couleur = this.grille[0][position];
 		this.grille[sizeColonne(arrivee)+1][arrivee]=couleur;
@@ -91,14 +92,14 @@ public void initialiserGrille(){
 		}
 		}
 	
-	public ArrayList<Integer> indicationDeplacement(int position,int arrivee){
+	public ArrayList<Integer> indicationDeplacement(int position,int deA){
 		
 		ArrayList<Integer> places = new ArrayList<Integer>();
 		if(this.grille[0][position]==1){
-			places=indicationDepHoraire(position,arrivee);
+			places=indicationDepHoraire(position,position+deA);
 			}
 		if(this.grille[0][position]==2){
-			places=indicationDepAntiHo(position,arrivee);
+			places=indicationDepAntiHo(position,position-deA);
 			}
 		return places;
 	}

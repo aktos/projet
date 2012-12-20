@@ -11,12 +11,23 @@ public class Partie {
 	}
 	
 	public boolean fin(Joueur joueur){
-			boolean fin = false;
-		 for(int i =0;i<18;i++){
+			boolean fin = true;
+			if(joueur.getCouleur()==1){
+			for(int i =0;i<18;i++){
 			 int parcours = this.plateau.getCouleur(0, i);
 			 if (parcours == joueur.getCouleur()){
-				 fin=true;
+				 fin=false;
 			 }
+			}
+			if(joueur.getCouleur()==2){
+				for(int i =25;i>6;i--){
+					 int parcours = this.plateau.getCouleur(0, i);
+					 if (parcours == joueur.getCouleur()){
+						 fin=false;
+					 }
+				}
+			}
+			 
 			 
 		 	}
 		 return fin;
@@ -89,7 +100,7 @@ public class Partie {
 				 if(this.plateau.sizeColonne(coul)!=0){
 					System.out.println("Vous avez des pions piégés dans la barre !");
 					
-				/*	for(int j1 = 0;j1<this.plateau.sizeColonne(coul);j1++){
+					for(int j1 = 0;j1<this.plateau.sizeColonne(coul);j1++){
 						ArrayList<Integer> liste= new ArrayList<Integer>();
 						liste = this.plateau.indicSortirPionsBarre(joueur, A);
 						if (liste!=null){
@@ -104,7 +115,7 @@ public class Partie {
 								System.out.println("Passez votre tour !");
 							}
 					 }
-				 }*/
+				 }
 					 
 					 
 				 }
@@ -125,7 +136,7 @@ public class Partie {
 		 int A = deA.getNombre();
 		 System.out.println("le premier de a pour valeur : "+A);
 		 int B = deB.getNombre();
-		 System.out.println("le premier de a pour valeur : "+B);
+		 System.out.println("le deuxieme de a pour valeur : "+B);
 		 
 		 if(fin(joueur)==false)
 		 {		 
@@ -186,19 +197,29 @@ public class Partie {
 		 if (D<C){
 			 joueurUn=joueurA;	
 			 joueurDeux=joueurB;
+			 System.out.println("le joueur A commence");
 			 
 		 }
 		 if (D>C){
 			 joueurUn=joueurB;	
 			 joueurDeux=joueurA;
+			 System.out.println("le joueur B commence");
 			 
 		 }
 		 
-		
+		 
 		 boolean Fin = false;
 		 while(Fin==false){
 			 faireJouer(joueurUn);
 			 faireJouer(joueurDeux);
+			 
+			 for(int j=0;j<26;j++){
+				 if(this.plateau.getCouleur(0, j)==0){
+					 Fin=true;
+				 }
+				 
+				 
+			 }
 		 }
 		 
 		
