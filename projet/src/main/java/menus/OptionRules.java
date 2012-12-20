@@ -8,6 +8,11 @@
 
 package menus;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 // ici on a la classe qui conservera les différentes règles du jeu
 public class OptionRules extends OptionMenu{
 	
@@ -21,6 +26,15 @@ public class OptionRules extends OptionMenu{
 	}
 	
 	public void rules(){
-		System.out.println("Règles YOUPI");
+		Desktop dt = Desktop.getDesktop();
+		try {
+			dt.browse(new URI("http://www.ffbg.fr/index.php?Itemid=13&id=9&option=com_content&task=view"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
