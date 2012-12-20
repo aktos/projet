@@ -181,7 +181,85 @@ public void initialiserGrille(){
 					}
 			}
 			return places;
+	}
+			
+			public ArrayList<Integer> indicationMangerHoraire(int position,int deA){
+				ArrayList<Integer> mange = new ArrayList<Integer>();
+				
+				int couleurA = this.grille[0][position+deA];
+				int couleur = this.grille[0][position];
+				// On vérifie que la position correspondante est bien dans le plateau
+				if(position+deA<24 && sizeColonne(position+deA)==1)
+					{
+					// Si un pion est déjà présent on vérifie si sa couleur correspond à celle du jeton que l'on déplace
+					
+						if (couleurA != couleur && couleurA!=0)  
+						{
+							mange.add(position+deA);						
+						}
+							
+					}
+				
+				return mange;
 			}
+			
+			
+			public ArrayList<Integer> indicationMangerAntiHo(int position,int deA){
+				ArrayList<Integer> mange = new ArrayList<Integer>();
+				
+				int couleurA = this.grille[0][position-deA];
+				int couleur = this.grille[0][position];
+				// On vérifie que la position correspondante est bien dans le plateau
+				if(position-deA<24 && sizeColonne(position-deA)==1)
+					{
+					// Si un pion est déjà présent on vérifie si sa couleur correspond à celle du jeton que l'on déplace
+					
+						if (couleurA != couleur && couleurA!=0)  
+						{
+							mange.add(position-deA);						
+						}
+							
+					}
+				
+				return mange;
+			}
+			public ArrayList<Integer> indicationManger(int position,int deA){
+
+				ArrayList<Integer> mange=new ArrayList<Integer>();
+				if (grille[0][position]==1){
+					
+					mange = indicationMangerHoraire(position,deA);
+					
+				}
+				
+				else {
+					mange = indicationMangerAntiHo(position,deA);
+				}
+				
+
+				return mange;
+
+			}
+
+
+				// Methode manger un autre pion
+			public void manger(int position,int dice) {
+				if ((position+dice) <28){
+				int couleur = this.grille[0][position+dice];
+				deplacer(position,dice);
+				
+				if (couleur == 1){
+					deplacer(position+dice,24-(position+dice));
+				}
+				if (couleur == 2){
+					deplacer(position+dice,25-(position+dice));
+				}
+				}
+				
+				else{ 
+					System.out.println("position demand�e n'est pas sur le plateau");
+				}
+				}	
 	
     public static String listToString(ArrayList<Integer>list,String header, String separator, String footer) {
             String delim = "";

@@ -19,17 +19,19 @@ public class Partie {
 			 int pos=0;
 			 int j=0;
 			 Scanner rep= new Scanner(System.in);
-			 // Boucle de recherche des deplacements possibles
+			 
+			 // Boucle de recherche des deplacements possibles 
 			 while(reponse=='n' && j<28){
 				
 				 int couleur = 0;
 					
-				 if (this.plateau.sizeColonne(j)==0)
+				 if (this.plateau.sizeColonne(j)==0) // si la taille de la colonne est nulle, la colonne est vide et donc couleur = 0
 				 {
 					 couleur = 0;
 				 }
 				 else
 				 {
+					 // Sinon on prend comme couleur la couleur du pion contenu en position taille-1
 					 int col =this.plateau.sizeColonne(j)-1;
 					 couleur = this.plateau.getCouleur(col, j);
 				 }
@@ -38,6 +40,7 @@ public class Partie {
 				
 				 
 				// on parcourt les jetons du joueur et on lui indique les deplacements possibles :
+				
 				 if(couleur==joueur.getCouleur()){					 
 				
 					 ArrayList<Integer> placesA = this.plateau.indicationDeplacement(j, A);
@@ -54,6 +57,7 @@ public class Partie {
 				}
 				 j++;
 			 }
+			 		// Au sein de la liste des positions possibles, le joueur choisit la position pour son pion :
 					 System.out.println("Quelle position choisissez-vous pour ce pion ? (entier)");
 					 long position=rep.nextLong();
 					 System.out.println(position);
