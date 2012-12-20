@@ -223,17 +223,17 @@ public void initialiserGrille(){
 				
 				return mange;
 			}
-			public ArrayList<Integer> indicationManger(int position,int arrivee){
+			public ArrayList<Integer> indicationManger(int position,int deA){
 
 				ArrayList<Integer> mange=new ArrayList<Integer>();
 				if (grille[0][position]==1){
 					
-					mange = indicationMangerHoraire(position,arrivee);
+					mange = indicationMangerHoraire(position,position+deA);
 					
 				}
 				
 				else {
-					mange = indicationMangerAntiHo(position,arrivee);
+					mange = indicationMangerAntiHo(position,position-deA);
 				}
 				
 
@@ -339,5 +339,19 @@ public void initialiserGrille(){
 
             return sb.append(footer).toString();
         }
+	
+    
+public boolean isInList(ArrayList<Integer> liste,int entierRecherche){
+	
+	boolean trouve = false;
+
+	for(int i = 0; i< liste.size();i++){
+		if(liste.get(i)== entierRecherche){
+			trouve = true;
+			break;
+		}
 	}
+	return trouve;
+}
+}
 
