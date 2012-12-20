@@ -80,12 +80,13 @@ public void initialiserGrille(){
 
 }
 	public void deplacer(int position,int dice) {
-		if (position+dice<28){
+		if ((position+dice) <28){
 		int couleur = this.grille[0][position];
 		this.grille[sizeColonne(position+dice)+1][position+dice]=couleur;
 		
 		this.grille[sizeColonne(position)][position]=0;
 		}
+		
 		else{ 
 			System.out.println("position demandée n'est pas sur le plateau");
 		}

@@ -161,23 +161,16 @@ public class Test1 extends TestCase {
 	public void testPartie(){
 		Joueur joueur = new Joueur(1);
 		Partie jeu = new Partie();
+		jeu.initialiser();
 		Grille grille = new Grille();
 		grille.initialiserGrille();
-		/*System.out.println(grille.sizeColonne(23));
-		grille.deplacer(1, 6);
+		//System.out.println(grille.sizeColonne(0));
+		//grille.deplacer(11, 3);
 		
-		jeu.deplacer(joueur,3);*/
+		jeu.deplacer(joueur,3);
+				
 
-		 ArrayList<Integer> placesA = grille.indicationDeplacement(0, 3);
-		 String reponse=" ";
-		 if (placesA != null){
-			 // pour lire ce que dicte le joueur
-			 Scanner rep= new Scanner(System.in);
-			 System.out.println("Voici les places disponibles pour votre pion "+placesA.toString()+" choisissez-vous de le deplacer o ou n ?");
-			 reponse = rep.nextLine();
-			 rep.close();
-		 }
-	
+		
 			
 	}
 	

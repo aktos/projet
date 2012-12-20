@@ -166,8 +166,17 @@ public class test extends TestCase {
 		grille.initialiserGrille();
 		System.out.println(grille.sizeColonne(23));
 		grille.deplacer(1, 6);
+		int j = 0;
 		
-		jeu.deplacer(joueur,3);
+		//jeu.deplacer(joueur,3);
+		
+		int pos=0;
+		Scanner rep= new Scanner(System.in);
+		 System.out.println("Quelle position choisissez-vous pour ce pion ? (entier)");
+		 String position=rep.nextLine();
+		 pos=(int)position.charAt(0);
+		 rep.close();
+		 grille.deplacer(j,pos);
 	
 			
 	}
