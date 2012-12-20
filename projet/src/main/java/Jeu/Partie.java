@@ -9,6 +9,9 @@ public class Partie {
 	public Partie(){
 		this.plateau=new Grille();
 	}
+	public Grille getGrille(){
+		return this.plateau;
+	}
 	
 	public boolean fin(Joueur joueur){
 			boolean fin = true;

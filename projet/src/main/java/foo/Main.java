@@ -32,6 +32,7 @@ public class Main {
 		menu1.ajouterOptionMenu(opt4);
 		menu1.ajouterOptionMenu(opt5);
 		System.out.println("je vous aime");
+		System.out.println("moi aussi !");
 		menu1.afficherMenu();
 		menu1.executer();
 	}
