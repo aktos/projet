@@ -157,6 +157,7 @@ public class Test1 extends TestCase {
 		System.out.println("position : "+jeton.getPosition());
 		
 	}*/
+	
 	// Test de la classe Partie
 	public void testPartie(){
 		Joueur joueur = new Joueur(1);
@@ -166,7 +167,9 @@ public class Test1 extends TestCase {
 		grille.initialiserGrille();
 		//System.out.println(grille.sizeColonne(0));
 		//grille.deplacer(11, 3);
-		
+		//grille.stocker(joueur, 0);
+		//jeu.fin(joueur);
+		//jeu.faireJouer(joueur);
 		jeu.deplacer(joueur,3);
 		//grille.manger(1, 4);
 		//grille.sortirPionsBarre(joueur, 1);
